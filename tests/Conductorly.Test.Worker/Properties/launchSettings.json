@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "Conductorly.Test.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
