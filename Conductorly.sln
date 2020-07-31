@@ -9,8 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conductorly.Abstractions", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conductorly.Test.Worker", "tests\Conductorly.Test.Worker\Conductorly.Test.Worker.csproj", "{0E41DA24-B0D9-4B90-BA35-5BB240179D67}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{1608D4AD-20E3-48BD-8FBB-DF7DFB7B5166}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{1608D4AD-20E3-48BD-8FBB-DF7DFB7B5166}"
 	ProjectSection(SolutionItems) = preProject
+		gitversion.yml = gitversion.yml
 		.github\workflows\nuget.yml = .github\workflows\nuget.yml
 	EndProjectSection
 EndProject
