@@ -1,9 +1,12 @@
 # Conductorly
 Simple .NET command query dispatching service.
 
+![Nuget](https://img.shields.io/nuget/v/Conductorly)
+![NuGet Build](https://github.com/jasongza/Conductorly/workflows/NuGet%20Build/badge.svg)
+
 ## Installation
 ```
-Install-Package Conductorly -IncludePrerelease
+Install-Package Conductorly
 ```
 
 ## Example usage

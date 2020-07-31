@@ -1,4 +1,4 @@
-name: Conductorly Nuget Packages
+name: NuGet Build
  
 on: [push]
 
