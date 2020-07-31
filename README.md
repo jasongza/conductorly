@@ -3,7 +3,7 @@ Simple .NET command query dispatching service.
 
 ## Installation
 ```
-Install-Package Conductorly -IncludePrerelease
+Install-Package Conductorly
 ```
 
 ## Example usage
