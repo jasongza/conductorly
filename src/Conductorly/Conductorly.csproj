@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
+    <Authors>Jason Grey</Authors>
+    <PackageProjectUrl>https://github.com/jasongza/Conductorly</PackageProjectUrl>
+    <Description>Simple .NET command query dispatching service.</Description>
+    <PackageTags>conductorly, commands, queries</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
