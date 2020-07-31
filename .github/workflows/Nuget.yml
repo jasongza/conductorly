@@ -24,14 +24,14 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
+        dotnet-version: 3.1.302
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Test with dotnet
       run: dotnet test --verbosity normal
     - name: Pack with dotnet
       run: |
-        dotnet pack src/Conductorly/Conductorly.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}
-        dotnet pack src/Conductorly.Abstractions/Conductorly.Abstractions.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }} 
+        dotnet pack src/Conductorly/Conductorly.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        dotnet pack src/Conductorly.Abstractions/Conductorly.Abstractions.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}
     - name: Push with dotnet
       run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
