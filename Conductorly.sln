@@ -12,14 +12,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1608D4AD-20E3-48BD-8FBB-DF7DFB7B5166}"
 	ProjectSection(SolutionItems) = preProject
 		gitversion.yml = gitversion.yml
-		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{78C5715E-A95C-4FA5-91A1-E5E5FA64C90D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6AB9C146-7191-465E-9C7F-DBB86AA48320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conductory.Unit.Tests", "tests\Conductory.Unit.Tests\Conductory.Unit.Tests.csproj", "{8E00727C-D444-48C6-9522-014E6DFAFDA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conductory.Unit.Tests", "tests\Conductory.Unit.Tests\Conductory.Unit.Tests.csproj", "{8E00727C-D444-48C6-9522-014E6DFAFDA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
