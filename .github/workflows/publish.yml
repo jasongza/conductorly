@@ -3,11 +3,11 @@ name: publish
 on:
   push:
     branches:  
-      - master
+      - 'master'
       - 'develop'
       - 'releases/**'
     tags:        
-      - **/*
+      - '**/*'
     
 jobs:
   build:
