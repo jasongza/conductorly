@@ -2,7 +2,8 @@
 Simple .NET command query dispatching service.
 
 ![Nuget](https://img.shields.io/nuget/v/Conductorly)
-![NuGet Build](https://github.com/jasongza/Conductorly/workflows/NuGet%20Build/badge.svg)
+![test](https://github.com/jasongza/Conductorly/workflows/test/badge.svg)
+![publish](https://github.com/jasongza/Conductorly/workflows/publish/badge.svg)
 
 ## Installation
 ```
