@@ -54,7 +54,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-### Use IConductorly.Send to call your handler
+### Use IConductorly.Send(...) to call your handler
 ```csharp
 // Conductorly.Abstractions.IConductorly
 string result = await conductorly.Send(new MyQuery());
