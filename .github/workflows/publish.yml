@@ -2,10 +2,6 @@ name: publish
  
 on:
   push:
-    branches:  
-      - 'master'
-      - 'develop'
-      - 'release/**'
     tags:        
       - '**/*'
     
