@@ -10,25 +10,25 @@ namespace Conductorly
     {
         private readonly TRequest query;
 
-        private IQueryDecorator<TRequest, TResponse> currentAction;
+        private IQueryHandler<TRequest, TResponse> currentHandler;
 
         public QueryBuilder(TRequest query, IServiceScopeFactory scopeFactory) : base(scopeFactory)
         {
             this.query = query;
 
-            currentAction = new DefaultQueryDecorator<TRequest, TResponse>((query, next) => Send(query));
+            currentHandler = new DecoratorQueryHandler<TRequest, TResponse>((query, next) => Send(query));
         }
 
-        public IQueryBuilder<TRequest, TResponse> Decorate(Func<TRequest, IQueryDecorator<TRequest, TResponse>, Task<TResponse>> function)
+        public IQueryBuilder<TRequest, TResponse> Decorate(Func<TRequest, IQueryHandler<TRequest, TResponse>, Task<TResponse>> function)
         {
-            currentAction = new DefaultQueryDecorator<TRequest, TResponse>(function, currentAction);
+            currentHandler = new DecoratorQueryHandler<TRequest, TResponse>(function, currentHandler);
 
             return this;
         }
 
         public Task<TResponse> Send()
         {
-            return currentAction.Send(query);
+            return currentHandler.Handle(query);
         }
     }
 }

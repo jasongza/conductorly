@@ -10,25 +10,25 @@ namespace Conductorly
     {
         private readonly TRequest command;
 
-        private ICommandDecorator<TRequest> currentAction;
+        private ICommandHandler<TRequest> currentHandler;
 
         public CommandBuilder(TRequest command, IServiceScopeFactory scopeFactory) : base(scopeFactory)
         {
             this.command = command;
 
-            currentAction = new DefaultCommandDecorator<TRequest>((command, next) => Send(command));
+            currentHandler = new DecoratorCommandHandler<TRequest>((command, next) => Send(command));
         }
 
-        public ICommandBuilder<TRequest> Decorate(Func<TRequest, ICommandDecorator<TRequest>, Task> action)
+        public ICommandBuilder<TRequest> Decorate(Func<TRequest, ICommandHandler<TRequest>, Task> function)
         {
-            currentAction = new DefaultCommandDecorator<TRequest>(action, currentAction);
+            currentHandler = new DecoratorCommandHandler<TRequest>(function, currentHandler);
 
             return this;
         }
 
         public Task Send()
         {
-            return currentAction.Send(command);
+            return currentHandler.Handle(command);
         }
     }
 }

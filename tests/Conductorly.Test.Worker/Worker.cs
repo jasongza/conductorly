@@ -37,7 +37,7 @@ namespace Conductorly.Test.Worker
                     .Decorate(async (query, next) =>
                     {
                         var stopWatch = Stopwatch.StartNew();
-                        var result = await next.Send(query);
+                        var result = await next.Handle(query);
 
                         Console.WriteLine($"Handler diagnostics: {stopWatch.ElapsedMilliseconds}ms");
 
@@ -46,7 +46,7 @@ namespace Conductorly.Test.Worker
                     .Decorate(async (query, next) =>
                     {
                         Console.WriteLine($"Before...");
-                        var result = await next.Send(query);
+                        var result = await next.Handle(query);
                         Console.WriteLine($"After...");
 
                         return result;
@@ -66,7 +66,7 @@ namespace Conductorly.Test.Worker
                     {
                         var stopWatch = Stopwatch.StartNew();
 
-                        await next.Send(command);
+                        await next.Handle(command);
 
                         Console.WriteLine($"Handler diagnostics: {stopWatch.ElapsedMilliseconds}ms");
                     })
@@ -74,7 +74,7 @@ namespace Conductorly.Test.Worker
                     {
                         Console.WriteLine($"Before...");
 
-                        await next.Send(command);
+                        await next.Handle(command);
 
                         Console.WriteLine($"After...");
                     })
