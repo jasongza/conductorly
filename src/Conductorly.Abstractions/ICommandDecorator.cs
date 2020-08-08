@@ -2,7 +2,7 @@
 
 namespace Conductorly.Abstractions
 {
-    public interface ICommandDecorator<TRequest> where TRequest : ICommand
+    public interface ICommandDecorator<in TRequest> where TRequest : ICommand
     {
         Task Send(TRequest command);
     }

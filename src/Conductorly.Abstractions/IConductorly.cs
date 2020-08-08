@@ -8,6 +8,8 @@ namespace Conductorly.Abstractions
 
         Task Send(ICommand command);
 
-        ICommandBuilder<TRequest> With<TRequest>(TRequest command) where TRequest : ICommand;
+        ICommandBuilder<TRequest> WithCommand<TRequest>(TRequest command) where TRequest : ICommand;
+
+        IQueryBuilder<TRequest, TResponse> WithQuery<TRequest, TResponse>(TRequest query) where TRequest : IQuery<TResponse>;
     }
 }
