@@ -26,7 +26,7 @@ namespace Conductorly
             return this;
         }
 
-        public Task<TResponse> Send()
+        public Task<TResponse> Start()
         {
             return currentHandler.Handle(query);
         }

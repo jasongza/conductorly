@@ -32,7 +32,6 @@ namespace Conductorly.Test.Worker
 
                 Console.WriteLine($"================= START DECORATED QUERY ================= ");
 
-                // Simplify usage...
                 var response = await conductorly.With<HelloQuery, string>(new HelloQuery("Chained"))
                     .Decorate(async (query, next) =>
                     {
@@ -51,7 +50,7 @@ namespace Conductorly.Test.Worker
 
                         return result;
                     })
-                    .Send();
+                    .Start();
 
                 Console.WriteLine(response);
 
@@ -78,7 +77,7 @@ namespace Conductorly.Test.Worker
 
                         Console.WriteLine($"After...");
                     })
-                    .Send();
+                    .Start();
 
                 Console.WriteLine($"================= END DECORATED COMMAND ================= ");
 

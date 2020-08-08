@@ -26,7 +26,7 @@ namespace Conductorly
             return this;
         }
 
-        public Task Send()
+        public Task Start()
         {
             return currentHandler.Handle(command);
         }
