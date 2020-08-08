@@ -33,7 +33,7 @@ namespace Conductorly.Test.Worker
                 Console.WriteLine($"================= START DECORATED QUERY ================= ");
 
                 // Simplify usage...
-                var response = await conductorly.WithQuery<HelloQuery, string>(new HelloQuery("Chained"))
+                var response = await conductorly.With<HelloQuery, string>(new HelloQuery("Chained"))
                     .Decorate(async (query, next) =>
                     {
                         var stopWatch = Stopwatch.StartNew();
@@ -61,7 +61,7 @@ namespace Conductorly.Test.Worker
 
                 Console.WriteLine($"================= START DECORATED COMMAND ================= ");
 
-                await conductorly.WithCommand(new PrintCommand("I'm chained!"))
+                await conductorly.With(new PrintCommand("I'm chained!"))
                     .Decorate(async (command, next) => 
                     {
                         var stopWatch = Stopwatch.StartNew();
