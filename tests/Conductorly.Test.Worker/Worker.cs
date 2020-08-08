@@ -2,6 +2,7 @@ using Conductorly.Abstractions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,13 +23,34 @@ namespace Conductorly.Test.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
                 var response = await conductorly.Send(new HelloQuery("World"));
 
                 await conductorly.Send(new PrintCommand(response));
 
-                await Task.Delay(1000, stoppingToken);
+                Console.WriteLine($"=================");
+
+                await conductorly.With(new PrintCommand("I'm chained!"))
+                    .Decorate(async (command, next) => 
+                    {
+                        var stopWatch = Stopwatch.StartNew();
+
+                        await next.Send(command);
+
+                        Console.WriteLine($"Handler diagnostics: {stopWatch.ElapsedMilliseconds}ms");
+                    })
+                    .Decorate(async (command, next) =>
+                    {
+                        Console.WriteLine($"Before...");
+
+                        await next.Send(command);
+
+                        Console.WriteLine($"After...");
+                    })
+                    .Send();
+
+                Console.WriteLine($"=================");
+
+                await Task.Delay(5000, stoppingToken);
             }
         }
     }
