@@ -2,6 +2,7 @@ using Conductorly.Abstractions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,13 +23,65 @@ namespace Conductorly.Test.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
-                var response = await conductorly.Send(new HelloQuery("World"));
-
-                await conductorly.Send(new PrintCommand(response));
+                await conductorly.Send
+                (
+                    new PrintCommand(await conductorly.Send(new HelloQuery("World")))
+                );
 
                 await Task.Delay(1000, stoppingToken);
+
+                Console.WriteLine($"================= START DECORATED QUERY ================= ");
+
+                var response = await conductorly.With<HelloQuery, string>(new HelloQuery("Chained"))
+                    .Decorate(async (query, next) =>
+                    {
+                        var stopWatch = Stopwatch.StartNew();
+                        var result = await next.Handle(query);
+
+                        Console.WriteLine($"Handler diagnostics: {stopWatch.ElapsedMilliseconds}ms");
+
+                        return result;
+                    })
+                    .Decorate(async (query, next) =>
+                    {
+                        Console.WriteLine($"Before...");
+                        var result = await next.Handle(query);
+                        Console.WriteLine($"After...");
+
+                        return result;
+                    })
+                    .Start();
+
+                Console.WriteLine(response);
+
+                Console.WriteLine($"================= END DECORATED QUERY ================= ");
+
+                await Task.Delay(1000, stoppingToken);
+
+                Console.WriteLine($"================= START DECORATED COMMAND ================= ");
+
+                await conductorly.With(new PrintCommand("I'm chained!"))
+                    .Decorate(async (command, next) => 
+                    {
+                        var stopWatch = Stopwatch.StartNew();
+
+                        await next.Handle(command);
+
+                        Console.WriteLine($"Handler diagnostics: {stopWatch.ElapsedMilliseconds}ms");
+                    })
+                    .Decorate(async (command, next) =>
+                    {
+                        Console.WriteLine($"Before...");
+
+                        await next.Handle(command);
+
+                        Console.WriteLine($"After...");
+                    })
+                    .Start();
+
+                Console.WriteLine($"================= END DECORATED COMMAND ================= ");
+
+                await Task.Delay(5000, stoppingToken);
             }
         }
     }
