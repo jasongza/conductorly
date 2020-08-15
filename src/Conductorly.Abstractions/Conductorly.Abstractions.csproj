@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Jason Grey</Authors>
-    <Description>Abstractions for dependency injection.</Description>
+    <Description>Conductorly abstractions for dependency injection.</Description>
     <PackageProjectUrl>https://github.com/jasongza/Conductorly</PackageProjectUrl>
     <PackageTags>conductorly, abstractions, commands, queries</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
