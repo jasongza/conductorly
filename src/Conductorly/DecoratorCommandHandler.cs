@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace Conductorly
 {
+    /// <summary>
+    /// Represents an instance of <see cref="ICommandHandler{TRequest}"/> used in <see cref="CommandBuilder{TRequest}"/>.
+    /// </summary>
+    /// <typeparam name="TRequest">Request Type</typeparam>
     internal class DecoratorCommandHandler<TRequest> : ICommandHandler<TRequest>
         where TRequest: ICommand
     {

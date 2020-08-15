@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Conductorly
 {
+    /// <summary>
+    /// Shared Conductorly base class.
+    /// </summary>
     public abstract class ConductorlyBase
     {
         private readonly IServiceScopeFactory scopeFactory;
@@ -14,6 +17,13 @@ namespace Conductorly
             this.scopeFactory = scopeFactory;
         }
 
+        /// <summary>
+        /// Find and invoke the registered handler for the query.
+        /// </summary>
+        /// <typeparam name="TResponse">Response Type</typeparam>
+        /// <param name="query">Request Type</param>
+        /// <returns><see cref="Task{TResponse}"/></returns>
+        /// <exception cref="ServiceNotRegisteredException">Thrown when IQueryHandler for <paramref name="query"/> is not registered.</exception>
         protected Task<TResponse> InvokeHandle<TResponse>(IQuery<TResponse> query)
         {
             using var scope = scopeFactory.CreateScope();
@@ -33,6 +43,12 @@ namespace Conductorly
             return methodInfo.Invoke(handler, new[] { query }) as Task<TResponse>;
         }
 
+        /// <summary>
+        /// Find and invoke the registered handler for the command
+        /// </summary>
+        /// <param name="command">Request Type</param>
+        /// <returns><see cref="Task"/></returns>
+        /// <exception cref="ServiceNotRegisteredException">Thrown when ICommandHandler for <paramref name="command"/> is not registered.</exception>
         protected Task InvokeHandle(ICommand command)
         {
             using var scope = scopeFactory.CreateScope();
