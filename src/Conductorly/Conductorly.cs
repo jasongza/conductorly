@@ -1,5 +1,6 @@
 ﻿using Conductorly.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace Conductorly
 {
@@ -20,6 +21,16 @@ namespace Conductorly
         public IQueryBuilder<TRequest, TResponse> With<TRequest, TResponse>(TRequest query) where TRequest : IQuery<TResponse>
         {
             return new QueryBuilder<TRequest, TResponse>(query, scopeFactory);
+        }
+
+        public Task<TResponse> Send<TResponse>(IQuery<TResponse> query)
+        {
+            return InvokeHandle(query);
+        }
+
+        public Task Send(ICommand command)
+        {
+            return InvokeHandle(command);
         }
     }
 }

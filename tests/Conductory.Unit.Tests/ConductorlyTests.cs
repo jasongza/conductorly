@@ -120,5 +120,27 @@ namespace Conductory.Unit.Tests
                 conductorly.Send(command.Object).Wait(); 
             });
         }
+
+        [Fact]
+        public void With_ReturnsExpectedCommandBuilder()
+        {
+            var command = new Mock<ICommand>();
+            var conductorly = new Conductorly.Conductorly(default);
+
+            var result = conductorly.With(command.Object);
+
+            Assert.Equal(typeof(CommandBuilder<ICommand>), result.GetType());
+        }
+
+        [Fact]
+        public void With_ReturnsExpectedQueryBuilder()
+        {
+            var query = new Mock<IQuery<string>>();
+            var conductorly = new Conductorly.Conductorly(default);
+
+            var result = conductorly.With<IQuery<string>, string>(query.Object);
+
+            Assert.Equal(typeof(QueryBuilder<IQuery<string>, string>), result.GetType());
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Conductorly
             this.scopeFactory = scopeFactory;
         }
 
-        public Task<TResponse> Send<TResponse>(IQuery<TResponse> query)
+        protected Task<TResponse> InvokeHandle<TResponse>(IQuery<TResponse> query)
         {
             using var scope = scopeFactory.CreateScope();
 
@@ -33,7 +33,7 @@ namespace Conductorly
             return methodInfo.Invoke(handler, new[] { query }) as Task<TResponse>;
         }
 
-        public Task Send(ICommand command)
+        protected Task InvokeHandle(ICommand command)
         {
             using var scope = scopeFactory.CreateScope();
 

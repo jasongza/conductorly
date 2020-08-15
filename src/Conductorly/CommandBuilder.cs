@@ -16,7 +16,7 @@ namespace Conductorly
         {
             this.command = command;
 
-            currentHandler = new DecoratorCommandHandler<TRequest>((command, next) => Send(command));
+            currentHandler = new DecoratorCommandHandler<TRequest>((command, next) => InvokeHandle(command));
         }
 
         public ICommandBuilder<TRequest> Decorate(Func<TRequest, ICommandHandler<TRequest>, Task> function)
