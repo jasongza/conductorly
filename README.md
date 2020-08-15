@@ -74,31 +74,31 @@ await conductorly.Send(new MyCommand());
 #### Query
 ```csharp
 var result = await conductorly.With<MyQuery, string>(new MyQuery())
-.Decorate(async (query, next) =>
-{
-    // Wrapped handler
-    return await next.Handle(query);
-})
-.Decorate(async (query, next) =>
-{
-    // Wrapped decorator
-    return await next.Handle(query);
-})
-.Start();
+    .Decorate(async (query, next) =>
+    {
+        // Wrapped handler
+        return await next.Handle(query);
+    })
+    .Decorate(async (query, next) =>
+    {
+        // Wrapped decorator
+        return await next.Handle(query);
+    })
+    .Start();
 ```
 
-### Command
+#### Command
 ```csharp
 await conductorly.With(new MyCommand())
-.Decorate(async (command, next) => 
-{
-    // Wrapped handler
-    await next.Handle(command);
-})
-.Decorate(async (command, next) =>
-{
-    // Wrapped decorator
-    await next.Handle(command);
-})
-.Start();
+    .Decorate(async (command, next) => 
+    {
+        // Wrapped handler
+        await next.Handle(command);
+    })
+    .Decorate(async (command, next) =>
+    {
+        // Wrapped decorator
+        await next.Handle(command);
+    })
+    .Start();
 ```
