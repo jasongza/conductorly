@@ -47,7 +47,7 @@ public class MyCommandHandler : ICommandHandler<MyCommand>
 }
 ```
 
-### Add .UseConductorly() to IHostBuilder
+### Add `.UseConductorly()` to IHostBuilder
 ```csharp 
 public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
@@ -62,14 +62,14 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-### Use IConductorly.Send(...) to call your handler
+### Use `IConductorly.Send(...)` to call your handler
 ```csharp
 // Conductorly.Abstractions.IConductorly
 string result = await conductorly.Send(new MyQuery());
 await conductorly.Send(new MyCommand());
 ```
 
-### Use .With(...), .Decorate(...) & .Start() to chain logic to your calls
+### Use `.With(...)` `.Decorate(...)` `.Start()` to chain logic to your calls
 
 #### Query
 ```csharp
